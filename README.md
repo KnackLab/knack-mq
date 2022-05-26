@@ -4,7 +4,7 @@
 # Usage
 
 ````
-```
+
 import KnackMQ from 'knack-mq';
 
 const mq = new KnackMQ({
@@ -25,4 +25,4 @@ const mail_data = {
 };
 
 ````
-```
+
