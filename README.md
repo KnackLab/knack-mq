@@ -24,5 +24,7 @@ const mail_data = {
   frontend_url: `knacklab.co`,
 };
 
+mq.sendEmail(mail_data);
+
 ````
 
