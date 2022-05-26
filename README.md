@@ -3,6 +3,8 @@
 
 # Usage
 
+````
+```
 import KnackMQ from 'knack-mq';
 
 const mq = new KnackMQ({
@@ -21,3 +23,6 @@ const mail_data = {
   description: 'Improving developer experience',
   frontend_url: `knacklab.co`,
 };
+
+````
+```
