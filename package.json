@@ -1,0 +1,26 @@
+{
+  "name": "knack-mq",
+  "version": "1.0.1",
+  "description": "Provides functions to send an email",
+  "main": "dist/index.js",
+  "module": "dist/index.m.js",
+  "unpkg": "dist/index.umd.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rm -rf dist && microbundle --tsconfig tsconfig.json --no-sourcemap"
+  },
+  "keywords": [],
+  "author": "Israel Ayokunnu",
+  "license": "ISC",
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@types/amqplib": "^0.8.2",
+    "microbundle": "^0.15.0"
+  },
+  "dependencies": {
+    "amqplib": "^0.9.1",
+    "util": "^0.12.4"
+  }
+}
