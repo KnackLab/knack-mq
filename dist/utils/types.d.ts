@@ -10,3 +10,6 @@ export declare type IConfig = {
     port: string;
     vhost: string;
 };
+export declare type IEnvConfig = {
+    useEnvironmentConfig: boolean;
+};

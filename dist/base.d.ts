@@ -1,4 +1,4 @@
-import { IConfig, IMessage } from './utils/types';
+import { IConfig, IEnvConfig, IMessage } from './utils/types';
 export declare abstract class Base {
     private user;
     private password;
@@ -6,7 +6,8 @@ export declare abstract class Base {
     private port;
     private vhost;
     private url;
-    constructor(config: IConfig);
+    constructor(config: IConfig | IEnvConfig);
+    private canUseEnvConfig;
     private connect;
     protected send(message: IMessage): Promise<void>;
 }
