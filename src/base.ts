@@ -52,11 +52,16 @@ export abstract class Base {
   // and properties it accepts
 
   protected async send(message: IMessage): Promise<void> {
+    console.log('[Data]', message);
     const channel = await this.connect(this.url);
     channel.assertQueue(message.queue, {
       durable: true,
     });
-    channel.sendToQueue(message.queue, Buffer.from(message.data));
+    const sentStatus = channel.sendToQueue(
+      message.queue,
+      Buffer.from(JSON.stringify(message.data))
+    );
+    console.log('[MQ Status]', sentStatus);
     console.log(' [x] Sent %s', message.data);
   }
 }

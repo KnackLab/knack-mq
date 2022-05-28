@@ -1,7 +1,12 @@
-export declare type QUEUE_TYPES = 'email_notification';
+export const SUPPORTED_QUEUES = [
+  'email_notification',
+  'event_notification',
+] as const;
+
+export declare type QUEUE_TYPES = typeof SUPPORTED_QUEUES[number];
 
 export declare type IMessage = {
-  queue: QUEUE_TYPES;
+  queue: QUEUE_TYPES | string;
   data: any;
 };
 
