@@ -4,6 +4,7 @@
 # Usage
 
 Without Configuration
+````
 Set the following in your environment variables
 RABBITMQ_VHOST=
 RABBITMQ_PASSWORD=
@@ -11,7 +12,7 @@ RABBITMQ_USER=
 RABBITMQ_URI=
 RABBITMQ_HOST=
 RABBITMQ_PORT=
-
+````
 
 With Configuration
 ````
