@@ -1,3 +1,4 @@
+require('dotenv').config();
 import util from 'util';
 import amqp from 'amqplib';
 import { IConfig, IEnvConfig, IMessage } from './utils/types';
