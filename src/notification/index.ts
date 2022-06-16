@@ -1,8 +1,8 @@
 import { IMessage } from 'src/utils/types';
 import { Base } from '../base';
 
-export class Email extends Base {
-  sendEmail({ data, queue = 'email_notification' }: IMessage) {
+export class Notification extends Base {
+  createNotification({ data, queue = 'event_notification' }: IMessage) {
     this.send({ data, queue });
   }
 }

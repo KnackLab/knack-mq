@@ -1,6 +1,6 @@
 {
   "name": "knack-mq",
-  "version": "1.0.11",
+  "version": "1.0.15",
   "description": "Provides functions to send data using amqlib",
   "main": "dist/index.js",
   "module": "dist/index.m.js",
@@ -8,7 +8,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "pub": "npm publish --access=public",
-    "build": "rm -rf dist && microbundle --tsconfig tsconfig.json --no-sourcemap"
+    "build": "rm -rf dist && microbundle --tsconfig tsconfig.json --no-sourcemap && npm publish --access=public"
   },
   "keywords": [],
   "author": "Israel Ayokunnu",
