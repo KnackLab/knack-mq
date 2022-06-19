@@ -1,10 +1,16 @@
 require('dotenv').config();
 import util from 'util';
 import amqp from 'amqplib';
-import { IConfig, IEnvConfig, IMessage, QUEUE_TYPES } from './utils/types';
+import {
+  IConfig,
+  IEnvConfig,
+  IMessage,
+  QUEUE_TYPES,
+  onConsume,
+} from './utils/types';
 import validateEnv from './utils/validateEnv';
 
-export abstract class Base {
+export class Base {
   private user: string;
   private password: string;
   private host: string;
@@ -38,6 +44,10 @@ export abstract class Base {
     });
   }
 
+  public getChannel() {
+    return this.channel;
+  }
+
   private canUseEnvConfig(config: IConfig | IEnvConfig): config is IEnvConfig {
     return (<IEnvConfig>config).useEnvironmentConfig !== undefined;
   }
@@ -53,41 +63,42 @@ export abstract class Base {
 
   protected async send(message: IMessage) {
     try {
-      console.log('[Data]', message);
+      if (this.channel) {
+        console.log('[Data]', message);
 
-      this.channel.assertQueue(message.queue, {
-        durable: true,
-      });
-      const sentStatus = this.channel.sendToQueue(
-        message.queue,
-        Buffer.from(JSON.stringify(message.data))
-      );
+        this.channel.assertQueue(message.queue, {
+          durable: true,
+        });
+        const sentStatus = this.channel.sendToQueue(
+          message.queue,
+          Buffer.from(JSON.stringify(message.data))
+        );
 
-      console.log('[MQ Status]', sentStatus);
-      console.log(' [x] Sent %s', message.data);
+        console.log('[MQ Status]', sentStatus);
+        console.log(' [x] Sent %s', message.data);
+      }
     } catch (error) {
       console.log(error);
     }
   }
 
-  async onReceive({
-    queue,
-  }: {
-    queue: QUEUE_TYPES;
-  }): Promise<amqp.ConsumeMessage> {
-    if (this.channel) {
-      this.channel?.assertQueue(queue, {
-        durable: true,
-      });
+  async onReceive(consumable: onConsume<amqp.ConsumeMessage>) {
+    this.connect(this.url).then((e) => {
+      this.listen(consumable);
+    });
+  }
+
+  private listen({ queue, callback }: onConsume<amqp.ConsumeMessage>) {
+    try {
+      this.channel.assertQueue(queue);
       this.channel.consume(queue, (msg) => {
-        console.log(msg);
         console.log('[x] receiving messages');
         this.channel.ack(msg);
 
-        return new Promise((resolve) => resolve(msg));
+        callback(msg);
       });
+    } catch (error) {
+      console.log(error);
     }
-
-    return null;
   }
 }
