@@ -26,3 +26,25 @@ export type onConsume<T> = {
   queue: QUEUE_TYPES;
   callback: (msg: T) => void;
 };
+
+export declare type INotification =
+  | IProgramInvitationAttributes
+  | IMatchRequestAttributes
+  | IExpertRecommendationAttributes
+  | ISurveyAttributes;
+
+export declare type IProgramInvitationAttributes = {
+  programInvitation: string;
+};
+
+export declare type IMatchRequestAttributes = {
+  matchRequest: string;
+};
+
+export declare type IExpertRecommendationAttributes = {
+  program: string;
+};
+
+export declare type ISurveyAttributes = {
+  surveyInvitation: string;
+};

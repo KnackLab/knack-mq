@@ -1,6 +1,6 @@
 import amqp from 'amqplib';
-import { IConfig, IEnvConfig, IMessage, QUEUE_TYPES } from './utils/types';
-export declare abstract class Base {
+import { IConfig, IEnvConfig, IMessage, onConsume } from './utils/types';
+export declare class Base {
     private user;
     private password;
     private host;
@@ -9,10 +9,10 @@ export declare abstract class Base {
     private url;
     private channel;
     constructor(config: IConfig | IEnvConfig);
+    getChannel(): amqp.Channel;
     private canUseEnvConfig;
     private connect;
     protected send(message: IMessage): Promise<void>;
-    onReceive({ queue, }: {
-        queue: QUEUE_TYPES;
-    }): Promise<amqp.ConsumeMessage>;
+    onReceive(consumable: onConsume<amqp.ConsumeMessage>): Promise<void>;
+    private listen;
 }

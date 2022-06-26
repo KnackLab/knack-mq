@@ -83,8 +83,11 @@ export class Base {
   }
 
   async onReceive(consumable: onConsume<amqp.ConsumeMessage>) {
-    this.connect(this.url).then((e) => {
-      this.listen(consumable);
+    this.connect(this.url).then(() => {
+      // TODO: need to debug why it fails randomly without setTimeout
+      setTimeout(() => {
+        this.listen(consumable);
+      }, 500);
     });
   }
 
