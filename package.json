@@ -1,6 +1,6 @@
 {
   "name": "knack-mq",
-  "version": "1.0.33",
+  "version": "1.0.35",
   "description": "Provides functions to send data using amqlib",
   "main": "dist/index.js",
   "module": "dist/index.m.js",
