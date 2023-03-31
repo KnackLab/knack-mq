@@ -1,13 +1,7 @@
 require('dotenv').config();
 import util from 'util';
 import amqp from 'amqplib';
-import {
-  IConfig,
-  IEnvConfig,
-  IMessage,
-  QUEUE_TYPES,
-  onConsume,
-} from './utils/types';
+import { IConfig, IEnvConfig, IMessage, onConsume } from './utils/types';
 import validateEnv from './utils/validateEnv';
 
 export class Base {
@@ -64,8 +58,6 @@ export class Base {
   protected async send(message: IMessage) {
     try {
       if (this.channel) {
-        console.log('[Data]', message);
-
         this.channel.assertQueue(message.queue, {
           durable: true,
         });
@@ -75,7 +67,6 @@ export class Base {
         );
 
         console.log('[MQ Status]', sentStatus);
-        console.log(' [x] Sent %s', message.data);
       }
     } catch (error) {
       console.log(error);

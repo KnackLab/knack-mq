@@ -1,9 +1,7 @@
-export const SUPPORTED_QUEUES = [
-  'email_notification',
-  'event_notification',
-] as const;
-
-export declare type QUEUE_TYPES = typeof SUPPORTED_QUEUES[number];
+export declare type QUEUE_TYPES =
+  | 'email_notification'
+  | 'event_notification'
+  | string;
 
 export declare type IMessage<T = any> = {
   queue?: QUEUE_TYPES;
@@ -42,7 +40,7 @@ export declare type IMatchRequestAttributes = {
 };
 
 export declare type IExpertRecommendationAttributes = {
-  program: string;
+  matchingProgramInvitation: string;
 };
 
 export declare type ISurveyAttributes = {

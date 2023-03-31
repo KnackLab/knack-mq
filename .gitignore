@@ -1,3 +1,11 @@
 dist
 node_modules
 .env
+node_modules/.DS_Store
+dist/utils/types.d.ts
+dist/index.umd.js
+dist/index.modern.mjs
+dist/index.m.js
+dist/index.js
+dist/index.d.ts
+.DS_Store
